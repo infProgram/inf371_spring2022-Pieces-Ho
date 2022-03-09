@@ -1,2 +1,2 @@
 
-print("test the github and VSC")
+print("test the github and VSC！")
