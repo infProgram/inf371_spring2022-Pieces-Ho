@@ -3,3 +3,8 @@ characterAlice = {'Strength':12, 'Dexterity':13, 'Constitution':9, 'Intelligence
 #print the entire dictionary
 print(characterAlice)
 
+#print the dictionary by for-loop
+for key in characterAlice:
+    print(key, end = "  ")
+
+
