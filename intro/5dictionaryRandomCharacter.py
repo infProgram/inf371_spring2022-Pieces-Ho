@@ -1,4 +1,5 @@
 import random
 
-# create a dictionary of character
+# create a list of character keys
 keys = ["strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"]
+
