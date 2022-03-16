@@ -10,4 +10,7 @@ dictionaryBeth = {}
 for i in keys:
     dictionaryBeth[i] = random.randint(1,20)
 
-print(dictionaryBeth)
+# nice print of dictionary
+for key in dictionaryBeth.keys():
+    print(key, end = " : ")
+    print(dictionaryBeth[key])
