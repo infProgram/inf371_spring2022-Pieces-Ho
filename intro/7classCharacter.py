@@ -20,17 +20,17 @@ class Character(object):
         
     def PrintHitpoints(self):
         print("Hitpoint", self.hitpoint)
+
     def Attack(self):
         return random.randint(1, self.strength)
-    def Defense(self, value):
-        v = value
-        v = random.randint(1, 20)
-        if(v > self.dexterity):
-            pass
-
-
-    def Heal(self):
-        pass
+   
+    def Defense(self, value):     
+        value = random.randint(1, 20)
+        if(value > self.dexterity):
+            self.hitpoint -= value 
+    
+    def Heal(self, value):
+        self.hitpoint += value
 
 if __name__ == "__main__":
     pass
