@@ -11,18 +11,30 @@ class Character(object):
         self.hitpoint = Constitution * 30 + 50
 
     def PrintPlayerStats(self):
-        pass      
+        print("Strength", self.strength)
+        print("Dexterity", self.dexterity)
+        print("Constitution", self.constitution)
+        print("Intelligence", self.intelligence)
+        print("Wisdom", self.wisdom)
+        print("Charisma", self.charisma)
+        
     def PrintHitpoints(self):
-        pass
+        print("Hitpoint", self.hitpoint)
     def Attack(self):
-        pass
-    def Defense(self):
-        pass
+        return random.randint(1, self.strength)
+    def Defense(self, value):
+        v = value
+        v = random.randint(1, 20)
+        if(v > self.dexterity):
+            pass
+
+
     def Heal(self):
         pass
 
 if __name__ == "__main__":
     pass
+
 
 
     
