@@ -17,10 +17,10 @@ class NewCharacter(object):
         print('%-10s' % "Intelligence:", '%-4s' % self.intelligence, end = "")
         print('%-10s' % "Wisdom:", '%-4s' % self.wisdom, end = "")
         print('%-10s' % "Charisma:", '%-4s' % self.charisma, end = "")
-        print('%-10s' % "Hitpoint:", '%-4s' % self.hitpoint)
+        print('%-10s' % "Hitpoint:", '%-4s' % self.hitpoint, end = " |\n")
         
     def PrintHitpoints(self):
-        print("Hitpoint:", self.hitpoint)
+        print('%-10s' % "Hitpoint:", self.hitpoint, end = " |\n")
 
     def Attack(self):
         return random.randint(1, self.strength)
@@ -34,28 +34,29 @@ class NewCharacter(object):
         self.hitpoint += value
 
 if __name__ == "__main__":
+    print("START GAME".center(140,"-"))
     Alice = NewCharacter(7, 18, 10, 13, 14, 17)
     Ben = NewCharacter(18, 11, 17, 10, 9, 12)
     Monster = NewCharacter(15, 5, 10, 3, 3, 3)
 
-    print('%-15s' % "Alice: ", end = "")
+    print("| ",'%-15s' % "Alice: ", end = "")
     Alice.PrintPlayerStats()
-    print('%-15s' % "Ben: ", end = "")
+    print("| ",'%-15s' % "Ben: ", end = "")
     Ben.PrintPlayerStats()
-    print('%-15s' % "Monster: ", end = "")
+    print("| ",'%-15s' % "Monster: ", end = "")
     Monster.PrintPlayerStats()
 
-    print("---FIGHT---")
+    print("FIGHT".center(140,"-"))
     Alice.Defense(Monster.Attack())
     Ben.Defense(Monster.Attack())
-    print("---FIGHT OVER---")
-    print("Alice", end = " ")
+    print("FIGHT OVER".center(140,"-"))
+    print("| ",'%-15s' % "Alice: ", end = " ")
     Alice.PrintHitpoints()
-    print("Ben", end = " ")
+    print("| ",'%-15s' % "Ben: ", end = " ")
     Ben.PrintHitpoints()
-    print("---HEAL BEN---")
+    print("HEAL BEN".center(140,"-"))
     Ben.Heal(5)
-    print("Alice", end = " ")
+    print("| ",'%-15s' % "Alice", end = " ")
     Alice.PrintHitpoints()
-    print("Ben", end = " ")
+    print("| ",'%-15s' % "Ben", end = " ")
     Ben.PrintHitpoints()
