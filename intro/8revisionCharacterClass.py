@@ -11,13 +11,13 @@ class NewCharacter(object):
         self.hitpoint = Constitution * 30 + 50
 
     def PrintPlayerStats(self):
-        print("Strength:", self.strength, end = "\t")
-        print("Dexterity:", self.dexterity, end = "\t")
-        print("Constitution:", self.constitution, end = "\t")
-        print("Intelligence:", self.intelligence, end = "\t")
-        print("Wisdom:", self.wisdom, end = "\t")
-        print("Charisma:", self.charisma, end = "\t")
-        print("Hitpoint:", self.hitpoint)
+        print('%-10s' % "Strength:", '%-4s' % self.strength, end = "")
+        print('%-10s' % "Dexterity:", '%-4s' % self.dexterity, end = "")
+        print('%-10s' % "Constitution:", '%-4s' % self.constitution, end = "")
+        print('%-10s' % "Intelligence:", '%-4s' % self.intelligence, end = "")
+        print('%-10s' % "Wisdom:", '%-4s' % self.wisdom, end = "")
+        print('%-10s' % "Charisma:", '%-4s' % self.charisma, end = "")
+        print('%-10s' % "Hitpoint:", '%-4s' % self.hitpoint)
         
     def PrintHitpoints(self):
         print("Hitpoint:", self.hitpoint)
@@ -37,11 +37,12 @@ if __name__ == "__main__":
     Alice = NewCharacter(7, 18, 10, 13, 14, 17)
     Ben = NewCharacter(18, 11, 17, 10, 9, 12)
     Monster = NewCharacter(15, 5, 10, 3, 3, 3)
-    print("Alice stats:")
+
+    print('%-15s' % "Alice: ", end = "")
     Alice.PrintPlayerStats()
-    print("Ben stats:")
+    print('%-15s' % "Ben: ", end = "")
     Ben.PrintPlayerStats()
-    print("Monster stats:")
+    print('%-15s' % "Monster: ", end = "")
     Monster.PrintPlayerStats()
 
     print("---FIGHT---")
