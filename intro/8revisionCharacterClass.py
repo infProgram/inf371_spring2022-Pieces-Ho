@@ -34,9 +34,9 @@ class NewCharacter(object):
         self.hitpoint += value
 
 if __name__ == "__main__":
-    Alice = Character(7, 18, 10, 13, 14, 17)
-    Ben = Character(18, 11, 17, 10, 9, 12)
-    Monster = Character(15, 5, 10, 3, 3, 3)
+    Alice = NewCharacter(7, 18, 10, 13, 14, 17)
+    Ben = NewCharacter(18, 11, 17, 10, 9, 12)
+    Monster = NewCharacter(15, 5, 10, 3, 3, 3)
     print("Alice stats:")
     Alice.PrintPlayerStats()
     print("Ben stats:")
