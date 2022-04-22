@@ -59,11 +59,3 @@ if __name__ == "__main__":
     print("Ben", end = " ")
     Ben.PrintHitpoints()
 
-
-
-
-    
-
-
-
-
