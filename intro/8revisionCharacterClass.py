@@ -63,5 +63,4 @@ if __name__ == "__main__":
     Ben.Heal(5)
     Alice.PrintHitpoints()
     Ben.PrintHitpoints()
-
     
