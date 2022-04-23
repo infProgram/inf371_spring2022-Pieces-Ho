@@ -49,23 +49,30 @@ class MagicCharacter(NewCharacter):
         super().PrintHitpoints()
         print("| ",'%-15s' % " ", end = " ")
         print( '%-10s' % "Mana:", self.mana, end = " |\n")
-        
+    
+    def magicMissile(self):
+        self.mana -= random.randint(5,10)
+
 
 
 if __name__ == "__main__":
-    print("START GAME".center(140,"-"))
+    print("Character Stats".center(140,"-"))   
     Alice = MagicCharacter("Alice", 7, 11, 10, 13, 14, 17)
     Ben = MagicCharacter("Ben", 18, 7, 17, 10, 9, 12)
     Monster = MagicCharacter("Monster", 20, 5, 10, 3, 3, 3)
+    Alice.PrintPlayerStats()
+    Ben.PrintPlayerStats()
+    Monster.PrintPlayerStats()
     isRunning = True
     while isRunning:
-        Alice.PrintPlayerStats()
-        Ben.PrintPlayerStats()
-        Monster.PrintPlayerStats()
+        
+        print("START GAME".center(140,"-"))
 
         Alice.PrintManaAndHitpoints()
-        Ben.PrintManaAndHitpoints()
-        Monster.PrintManaAndHitpoints()
+
+        print("After Magic Missile".center(140,"-"))
+        Alice.magicMissile()
+        Alice.PrintManaAndHitpoints()
     
         print("QUIT GAME?(input 'Q')".center(140,"-"))
         str = input()
