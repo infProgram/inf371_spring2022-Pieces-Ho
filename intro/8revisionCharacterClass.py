@@ -27,10 +27,11 @@ class NewCharacter(object):
         print( '%-10s' % "Hitpoint:", self.hitpoint, end = " |\n")
 
     def Attack(self):
+        print("| ",'%-15s' % "Note: ", self.getName(), "attacked ",end = "")
         return random.randint(1, self.strength)
    
-    def Defense(self, value):     
-        # value = random.randint(1, 20)
+    def Defense(self, value):    
+        print(self.getName()+"!")
         if(value > self.dexterity):
             self.hitpoint -= value 
     
@@ -45,15 +46,13 @@ if __name__ == "__main__":
     print("START GAME".center(140,"-"))
     Alice = NewCharacter("Alice", 7, 18, 10, 13, 14, 17)
     Ben = NewCharacter("Ben", 18, 11, 17, 10, 9, 12)
-    Monster = NewCharacter("Monster", 15, 5, 10, 3, 3, 3)
+    Monster = NewCharacter("Monster", 20, 5, 10, 3, 3, 3)
 
     Alice.PrintPlayerStats()
     Ben.PrintPlayerStats()
     Monster.PrintPlayerStats()
 
     print("FIGHT".center(140,"-"))
-    print("| ",'%-15s' % "Note: ", Monster.getName(), "attacked", Alice.getName()+"!")
-    print("| ",'%-15s' % "Note: ", Monster.getName(),"attacked", Ben.getName()+"!")
     Alice.Defense(Monster.Attack())
     Ben.Defense(Monster.Attack())
     print("FIGHT OVER".center(140,"-"))
