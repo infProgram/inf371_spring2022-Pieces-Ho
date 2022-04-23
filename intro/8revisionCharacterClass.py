@@ -30,7 +30,7 @@ class NewCharacter(object):
         return random.randint(1, self.strength)
    
     def Defense(self, value):     
-        value = random.randint(1, 20)
+        # value = random.randint(1, 20)
         if(value > self.dexterity):
             self.hitpoint -= value 
     
