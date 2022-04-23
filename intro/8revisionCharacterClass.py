@@ -35,8 +35,8 @@ class NewCharacter(object):
         if(value > self.dexterity):
             self.hitpoint -= value 
     
-    def Heal(self, value):
-        self.hitpoint += value
+    def Heal(self):
+        self.hitpoint += random.randint(1, self.constitution)
 
     def getName(self):
         return self.name
@@ -59,7 +59,7 @@ if __name__ == "__main__":
     Alice.PrintHitpoints()
     Ben.PrintHitpoints()
     print("AFTER HEAL BEN".center(140,"-"))
-    Ben.Heal(5)
+    Ben.Heal()
     Alice.PrintHitpoints()
     Ben.PrintHitpoints()
     
