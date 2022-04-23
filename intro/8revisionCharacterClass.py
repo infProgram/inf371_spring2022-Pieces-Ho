@@ -1,5 +1,4 @@
 import random
-import inspect, re
 
 class NewCharacter(object):
     def __init__(self, Name, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma) :
