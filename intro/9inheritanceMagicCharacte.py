@@ -41,4 +41,6 @@ class NewCharacter(object):
         return self.name
 
 class MagicCharacter(NewCharacter):
-    pass
+    def __init__(self, Name, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma):
+        super().__init__(Name, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma)
+        self.mana = self.intelligence * 30 + 50
