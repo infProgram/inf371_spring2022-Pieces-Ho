@@ -74,7 +74,7 @@ if __name__ == "__main__":
         Alice.magicMissile()
         Alice.PrintManaAndHitpoints()
     
-        print("QUIT GAME?(input 'Q')".center(140,"-"))
-        str = input()
+        # print("QUIT GAME?(input 'Q')".center(140,"-"))
+        str = input("QUIT GAME NOW? (input 'Q')")
         if str == 'q'or str =='Q':
                 isRunning = False
