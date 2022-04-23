@@ -44,22 +44,29 @@ class NewCharacter(object):
 
 if __name__ == "__main__":
     print("START GAME".center(140,"-"))
-    Alice = NewCharacter("Alice", 7, 18, 10, 13, 14, 17)
-    Ben = NewCharacter("Ben", 18, 11, 17, 10, 9, 12)
+    Alice = NewCharacter("Alice", 7, 11, 10, 13, 14, 17)
+    Ben = NewCharacter("Ben", 18, 7, 17, 10, 9, 12)
     Monster = NewCharacter("Monster", 20, 5, 10, 3, 3, 3)
+    isRunning = True
 
-    Alice.PrintPlayerStats()
-    Ben.PrintPlayerStats()
-    Monster.PrintPlayerStats()
+    while isRunning:
+        Alice.PrintPlayerStats()
+        Ben.PrintPlayerStats()
+        Monster.PrintPlayerStats()
 
-    print("FIGHT".center(140,"-"))
-    Alice.Defense(Monster.Attack())
-    Ben.Defense(Monster.Attack())
-    print("FIGHT OVER".center(140,"-"))
-    Alice.PrintHitpoints()
-    Ben.PrintHitpoints()
-    print("AFTER HEAL BEN".center(140,"-"))
-    Ben.Heal()
-    Alice.PrintHitpoints()
-    Ben.PrintHitpoints()
+        print("FIGHT".center(140,"-"))
+        Alice.Defense(Monster.Attack())
+        Ben.Defense(Monster.Attack())
+        print("FIGHT OVER".center(140,"-"))
+        Alice.PrintHitpoints()
+        Ben.PrintHitpoints()
+        print("AFTER HEAL BEN".center(140,"-"))
+        Ben.Heal()
+        Alice.PrintHitpoints()
+        Ben.PrintHitpoints()
+
+        print("QUIT GAME?(input 'Q')".center(140,"-"))
+        str = input()
+        if str == 'q'or str =='Q':
+             isRunning = False
     
