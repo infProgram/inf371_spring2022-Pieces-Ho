@@ -87,8 +87,17 @@ if __name__ == "__main__":
         print("After Heal Mana".center(140,"-"))
         Alice.HealMana(10)
         Alice.PrintManaAndHitpoints()
+
+        print("FIGHT".center(140,"-"))
+        Alice.Defense(Monster.Attack())
+        Ben.Defense(Monster.Attack())
+        print("FIGHT OVER".center(140,"-"))
+        Alice.PrintHitpoints()
+        Ben.PrintHitpoints()
+        print("AFTER HEAL BEN".center(140,"-"))
+        Ben.Heal()
+        Ben.PrintHitpoints()
     
-        # print("QUIT GAME?(input 'Q')".center(140,"-"))
         str = input("QUIT GAME NOW? (input 'Q')")
         if str == 'q'or str =='Q':
                 isRunning = False
