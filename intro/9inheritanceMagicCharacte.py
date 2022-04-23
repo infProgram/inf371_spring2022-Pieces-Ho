@@ -44,3 +44,30 @@ class MagicCharacter(NewCharacter):
     def __init__(self, Name, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma):
         super().__init__(Name, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma)
         self.mana = self.intelligence * 30 + 50
+    
+    def PrintManaAndHitpoints(self):
+        super().PrintHitpoints()
+        print("| ",'%-15s' % " ", end = " ")
+        print( '%-10s' % "Mana:", self.mana, end = " |\n")
+        
+
+
+if __name__ == "__main__":
+    print("START GAME".center(140,"-"))
+    Alice = MagicCharacter("Alice", 7, 11, 10, 13, 14, 17)
+    Ben = MagicCharacter("Ben", 18, 7, 17, 10, 9, 12)
+    Monster = MagicCharacter("Monster", 20, 5, 10, 3, 3, 3)
+    isRunning = True
+    while isRunning:
+        Alice.PrintPlayerStats()
+        Ben.PrintPlayerStats()
+        Monster.PrintPlayerStats()
+
+        Alice.PrintManaAndHitpoints()
+        Ben.PrintManaAndHitpoints()
+        Monster.PrintManaAndHitpoints()
+    
+        print("QUIT GAME?(input 'Q')".center(140,"-"))
+        str = input()
+        if str == 'q'or str =='Q':
+                isRunning = False
