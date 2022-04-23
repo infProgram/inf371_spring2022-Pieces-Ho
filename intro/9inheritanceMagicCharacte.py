@@ -50,8 +50,11 @@ class MagicCharacter(NewCharacter):
         print("| ",'%-15s' % " ", end = " ")
         print( '%-10s' % "Mana:", self.mana, end = " |\n")
     
-    def magicMissile(self):
+    def MagicMissile(self):
         self.mana -= random.randint(5,10)
+
+    def Fireball(self):
+        self.mana -= random.randint(10,20)
 
 
 
@@ -71,7 +74,11 @@ if __name__ == "__main__":
         Alice.PrintManaAndHitpoints()
 
         print("After Magic Missile".center(140,"-"))
-        Alice.magicMissile()
+        Alice.MagicMissile()
+        Alice.PrintManaAndHitpoints()
+
+        print("After Fireball".center(140,"-"))
+        Alice.Fireball()
         Alice.PrintManaAndHitpoints()
     
         # print("QUIT GAME?(input 'Q')".center(140,"-"))
