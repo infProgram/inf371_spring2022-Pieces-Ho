@@ -56,6 +56,9 @@ class MagicCharacter(NewCharacter):
     def Fireball(self):
         self.mana -= random.randint(10,20)
 
+    def HealMana(self, value):
+        self.mana += value
+
 
 
 if __name__ == "__main__":
@@ -79,6 +82,10 @@ if __name__ == "__main__":
 
         print("After Fireball".center(140,"-"))
         Alice.Fireball()
+        Alice.PrintManaAndHitpoints()
+
+        print("After Heal Mana".center(140,"-"))
+        Alice.HealMana(10)
         Alice.PrintManaAndHitpoints()
     
         # print("QUIT GAME?(input 'Q')".center(140,"-"))
