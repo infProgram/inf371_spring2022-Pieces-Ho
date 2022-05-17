@@ -46,29 +46,39 @@ white = (255, 255, 255)
 blue = (0, 0, 120)
 backgroundColor = (100, 100, 100)
 
-screen = pygame.display.set_mode(size)
+screen = pygame.display.set_mode(size,pygame.NOFRAME)
+screen.fill((0,139,0))  # 主窗口背景颜色
+pygame.display.set_caption('Ball Game') #主窗口标题
 
-ball = Item("intro_ball.gif", size, ballSpeed)
-face = Item("smileyTiny.png", size, faceSpeed)
+# ball = Item("intro_ball.gif", size, ballSpeed)
+# face = Item("smileyTiny.png", size, faceSpeed)
+# 
 
 testSurface = pygame.Surface((50,50))
-testRect = pygame.Rect(0, 0, 50, 50)
+testSurface.fill((152,245,255))
+testRect = pygame.Rect(10, 10, 50, 50)
 test = pygame.draw.rect(testSurface, blue, testRect)
+
+
+
 
 isRunning = True
 while isRunning:
   for event in pygame.event.get():
-    if event.type == pygame.QUIT: sys.exit()
-  
-  ball.randomBounceOnCollide(face.rect)
-  face.randomBounceOnCollide(ball.rect)
+    # if event.type == pygame.K_ESCAPE: sys.exit()
+    if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE: sys.exit()
 
-  ball.move()
-  face.move()
+  
+  # ball.randomBounceOnCollide(face.rect)
+  # face.randomBounceOnCollide(ball.rect)
+
+  # ball.move()
+  # face.move()
   
 
-  screen.fill(backgroundColor)
-  ball.blit(screen)
-  face.blit(screen)
-  screen.blit(testSurface, testRect)
-  pygame.display.flip()
+  # screen.fill(backgroundColor)
+  # ball.blit(screen)
+  # face.blit(screen)
+  screen.blit(testSurface, testRect)  # 新矩形对象粘在主窗口上（图像，坐标）
+  pygame.draw.circle(screen, (133,233,23), [60, 250], 40, width=0)
+  pygame.display.flip()  # 刷新整个界面显示  # pygame.display.update(_) 刷新指定部分显示
