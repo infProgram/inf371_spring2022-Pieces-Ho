@@ -23,34 +23,22 @@ class OneBall:
 
       self.x = self.x + self.ballSpeedX
       self.y = self.y + self.ballSpeedY
-  def getBall(self):
-      
-      pass
 
   def collide(self, OneBall):
-      print("In Method.",end=" ")
-      
+    
       if self.ball.colliderect(OneBall.ball):
-        print("Collide.",end="\n\n")
-
+        print("Collide.")
         self.ballSpeedX = - self.ballSpeedX
         self.ballSpeedY = - self.ballSpeedY
-        self.x = self.x + self.ballSpeedX * 0.5
-        self.y = self.y + self.ballSpeedY * 0.5
-
-        # if self.ball.left <= OneBall.ball.right or self.ball.right >= OneBall.ball.left:     
-        #   self.ballSpeedX = - self.ballSpeedX
-        #   self.x = self.x + self.ballSpeedX * 0.5
-        # if self.ball.top <= OneBall.ball.bottom or self.ball.bottom >= OneBall.ball.top:   
-        #   self.ballSpeedY = - self.ballSpeedY
-        #   self.y = self.y + self.ballSpeedY * 0.5
+        self.x = self.x + self.ballSpeedX * 10  #when collide,they back in 10 times speed
+        self.y = self.y + self.ballSpeedY * 10
 
     
 
 size = width, height = 640, 480
 backgroundColor = (104,183,150)
 screen = pygame.display.set_mode(size)
-pygame.display.set_caption('Ball Game') #主窗口标题
+pygame.display.set_caption('Ball Game') #  主窗口标题（Title）
 
 ball001 = OneBall(2,2,320,240,(162,56,31))
 ball002 = OneBall(3,4,200,100,(255,255,255))
@@ -64,10 +52,8 @@ while isRunning:
   ball002.draw()
   ball001.move()
   ball002.move()
-
   ball002.collide(ball001)
- 
-  
+  ball001.collide(ball002)
 
   time.sleep(0.009)
   pygame.display.flip()  # 刷新整个界面显示  # pygame.display.update(_) 刷新指定部分显示
