@@ -1,11 +1,13 @@
-import sys, pygame, random
+import sys, pygame, time
 pygame.init()
+
+
 
 
 size = width, height = 640, 480
 ballSpeed = [2, 2]
 backgroundColor = (104,183,150)
-screen = pygame.display.set_mode(size,pygame.RESIZABLE)
+screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Ball Game') #主窗口标题
 
 x = y = 200
@@ -39,9 +41,15 @@ while isRunning:
   screen.fill(backgroundColor)
   ball = pygame.draw.circle(screen, (162,56,31), [x, y], 40, width=0)
   frame = pygame.draw.circle(screen, (0,0,0), [x, y], 40, width=5)
+  
+  if ball.left <= 0 or ball.right >= width:     #如果球碰到左或者右边缘，就将球横向速度取反
+        ballSpeed[0] = - ballSpeed[0]
+  if ball.top <= 0 or ball.bottom >= height:    #如果球碰到左或者右边缘，就将球纵向速度取反
+        ballSpeed[1] = - ballSpeed[1]
 
-  if ball.
-
+  x = x+ballSpeed[0]
+  y = y+ballSpeed[1]
+  time.sleep(0.009)
 
 
   # screen.blit(testSurface, testRect)  # 新矩形对象粘在主窗口上（图像，坐标）
