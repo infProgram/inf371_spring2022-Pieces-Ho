@@ -1,6 +1,14 @@
 import sys, pygame, time
 pygame.init()
 
+class OneBall:
+  def __init__(self,speed) -> None:
+     self.speed = speed
+
+  def move(self):
+     pass
+
+
 
 
 
