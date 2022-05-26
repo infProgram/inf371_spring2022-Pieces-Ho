@@ -2,6 +2,7 @@ import sys, pygame, time
 pygame.init()
 # Realising that when I finish the ballExtend.py, actually I finish this task code.
 # So I move these code to here, and modify the ballExtend.py which should be easy and without class
+# Addition: Try to add more balls in screen.
 
 class OneBall:
   def __init__(self,speedX,speedY,x,y,colour) -> None:
@@ -32,18 +33,19 @@ class OneBall:
         print("Collide.")
         self.ballSpeedX = - self.ballSpeedX
         self.ballSpeedY = - self.ballSpeedY
-        self.x = self.x + self.ballSpeedX * 10  #when collide,they back in 10 times speed
-        self.y = self.y + self.ballSpeedY * 10
+        self.x = self.x + self.ballSpeedX * 8  #when collide,they back in 10 times speed
+        self.y = self.y + self.ballSpeedY * 8
 
     
 
-size = width, height = 640, 480
+size = width, height = 1024, 680
 backgroundColor = (104,183,150)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Ball Game') #  主窗口标题（Title）
 
 ball001 = OneBall(2,2,320,240,(162,56,31))
 ball002 = OneBall(3,4,200,100,(255,255,255))
+ball003 = OneBall(-2,-3,450,330,(0,255,0))
 isRunning = True
 while isRunning:
   for event in pygame.event.get():
@@ -52,10 +54,20 @@ while isRunning:
 
   ball001.draw()
   ball002.draw()
+  ball003.draw()
+
   ball001.move()
   ball002.move()
+  ball003.move()
+
   ball002.collide(ball001)
   ball001.collide(ball002)
+
+  ball003.collide(ball001)
+  ball001.collide(ball003)
+
+  ball003.collide(ball002)
+  ball002.collide(ball003)
 
   time.sleep(0.009)
   pygame.display.flip()  # 刷新整个界面显示  # pygame.display.update(_) 刷新指定部分显示
