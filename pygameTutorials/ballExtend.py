@@ -2,25 +2,26 @@ import sys, pygame, time
 pygame.init()
 
 class OneBall:
-  def __init__(self,speed,x,y,colour) -> None:
-     self.speed = speed
+  def __init__(self,speedX,speedY,x,y,colour) -> None:
+     self.ballSpeedX = speedX
+     self.ballSpeedY = speedY
      self.x = x
      self.y = y
      self.ball = pygame.draw.circle(screen, colour, [x, y], 40, width=0)
      self.ballFrame = pygame.draw.circle(screen, (0,0,0), [x, y], 40, width=5)
 
   def move(self):
-      if ball.left <= 0 or ball.right >= width:     #如果球碰到左或者右边缘，就将球横向速度取反
-        ballSpeed[0] = - ballSpeed[0]
-      if ball.top <= 0 or ball.bottom >= height:    #如果球碰到左或者右边缘，就将球纵向速度取反
-        ballSpeed[1] = - ballSpeed[1]
+      if self.ball.left <= 0 or self.ball.right >= width:     #如果球碰到左或者右边缘，就将球横向速度取反
+        self.ballSpeedX = - self.ballSpeedX
+      if self.ball.top <= 0 or self.ball.bottom >= height:    #如果球碰到左或者右边缘，就将球纵向速度取反
+        self.ballSpeedY = - self.ballSpeedY
 
-      x = x+ballSpeed[0]
-      y = y+ballSpeed[1]
+      x = x + self.ballSpeedX
+      y = y + self.ballSpeedY
 
 
 
-ballSpeed = [2, 2]
+#ballSpeed = [2, 2]
 size = width, height = 640, 480
 backgroundColor = (104,183,150)
 screen = pygame.display.set_mode(size)
