@@ -1,42 +1,8 @@
 import sys, pygame, time
 pygame.init()
 
-class OneBall:
-  def __init__(self,speedX,speedY,x,y,colour) -> None:
-     self.ballSpeedX = speedX
-     self.ballSpeedY = speedY
-     self.x = x
-     self.y = y
-     self.ballColour = colour
-     self.ball = pygame.draw.circle(screen, self.ballColour, [self.x, self.y], 40, width=0)
-     self.ballFrame = pygame.draw.circle(screen, (0,0,0), [self.x, self.y], 40, width=5)
-     
-  def draw(self):
-    self.ball = pygame.draw.circle(screen, self.ballColour, [self.x, self.y], 40, width=0)
-    self.ballFrame = pygame.draw.circle(screen, (0,0,0), [self.x, self.y], 40, width=5)
-
-  def move(self):
-      if self.ball.left <= 0 or self.ball.right >= width:     
-        self.ballSpeedX = - self.ballSpeedX
-      if self.ball.top <= 0 or self.ball.bottom >= height:   
-        self.ballSpeedY = - self.ballSpeedY
-
-      self.x = self.x + self.ballSpeedX
-      self.y = self.y + self.ballSpeedY
-
-  def collide(self, OneBall):
-    
-      if self.ball.colliderect(OneBall.ball):
-        print("Collide.")
-        self.ballSpeedX = - self.ballSpeedX
-        self.ballSpeedY = - self.ballSpeedY
-        self.x = self.x + self.ballSpeedX * 10  #when collide,they back in 10 times speed
-        self.y = self.y + self.ballSpeedY * 10
-
-    
-
 size = width, height = 640, 480
-backgroundColor = (104,183,150)
+backgroundColor = (104,183,150) # green background looks like basketball court
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Ball Game') #  主窗口标题（Title）
 
@@ -66,6 +32,16 @@ while isRunning:
   Bx = Bx + BSx
   By = By + BSy
 
+  if ballA.colliderect(ballB):
+    print("Collide.")
+    ASx = - ASx
+    ASy = - ASy
+    BSx = - BSx
+    BSy = - BSy
+    Ax = Ax + ASx * 9  #when collide,they back in 10 times speed
+    Ay = Ay + ASy * 9
+    Bx = Bx + BSx * 9  
+    By = By + BSy * 9
 
   time.sleep(0.009)
   pygame.display.flip()  # 刷新整个界面显示  # pygame.display.update(_) 刷新指定部分显示
