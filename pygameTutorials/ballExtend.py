@@ -21,6 +21,17 @@ class OneBall:
 
       self.x = self.x + self.ballSpeedX
       self.y = self.y + self.ballSpeedY
+  def collide(self, OneBall):
+    flag = pygame.sprite.collide_circle(self.ball,OneBall.ball)
+    if flag:
+      print("Boom!")
+
+    # if self.ball.colliderect(OneBall.ball):
+    #   self.ballSpeedX = - self.ballSpeedX
+      # self.ballSpeedY = - self.ballSpeedY
+    self.x = self.x + self.ballSpeedX
+    self.y = self.y + self.ballSpeedY
+    
 
 size = width, height = 640, 480
 backgroundColor = (104,183,150)
@@ -28,7 +39,7 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Ball Game') #主窗口标题
 
 ball001 = OneBall(2,2,320,240,(162,56,31))
-ball002 = OneBall(3,4,200,100,(255,255,255))
+ball002 = OneBall(3,3,400,100,(255,255,255))
 isRunning = True
 while isRunning:
   for event in pygame.event.get():
@@ -40,6 +51,8 @@ while isRunning:
   ball001.move()
   ball002.draw()
   ball002.move()
+
+  ball002.collide(ball001)
 
 
   time.sleep(0.009)
