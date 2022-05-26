@@ -40,20 +40,32 @@ backgroundColor = (104,183,150)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Ball Game') #  主窗口标题（Title）
 
-ball001 = OneBall(2,2,320,240,(162,56,31))
-ball002 = OneBall(3,4,200,100,(255,255,255))
+Asite = Ax,Ay = 320,240
+Bsite = Bx,By = 200,100
+Aspeed = ASx,ASy = 2,2
+Bspeed = BSx,BSy = 3,4
+
 isRunning = True
 while isRunning:
   for event in pygame.event.get():
     if (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE) or event.type == pygame.QUIT: sys.exit()
   screen.fill(backgroundColor)
 
-  ball001.draw()
-  ball002.draw()
-  ball001.move()
-  ball002.move()
-  ball002.collide(ball001)
-  ball001.collide(ball002)
+  ballA = pygame.draw.circle(screen, (162,56,31), [Ax,Ay], 40, width=0)
+  ballA_Frame = pygame.draw.circle(screen, (0,0,0), [Ax,Ay], 40, width=5)
+  ballB = pygame.draw.circle(screen, (255,255,255), [Bx,By], 40, width=0)
+  ballB_Frame = pygame.draw.circle(screen, (0,0,0), [Bx,By], 40, width=5)
+
+  if ballA.left <= 0 or ballA.right >= width:  ASx = - ASx
+  if ballA.top <= 0 or ballA.bottom >= height:   ASy = - ASy
+  Ax = Ax + ASx
+  Ay = Ay + ASy
+
+  if ballB.left <= 0 or ballB.right >= width:  BSx = - BSx
+  if ballB.top <= 0 or ballB.bottom >= height:   BSy = - BSy
+  Bx = Bx + BSx
+  By = By + BSy
+
 
   time.sleep(0.009)
   pygame.display.flip()  # 刷新整个界面显示  # pygame.display.update(_) 刷新指定部分显示
