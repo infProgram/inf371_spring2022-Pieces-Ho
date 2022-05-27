@@ -21,8 +21,10 @@ class OneBall:
   def move(self):
       if self.ball.left <= 0 or self.ball.right >= width:     
         self.ballSpeedX = - self.ballSpeedX
+        self.x = self.x + self.ballSpeedX * 8
       if self.ball.top <= 0 or self.ball.bottom >= height:   
         self.ballSpeedY = - self.ballSpeedY
+        self.y = self.y + self.ballSpeedY * 8
 
       self.x = self.x + self.ballSpeedX
       self.y = self.y + self.ballSpeedY
@@ -33,9 +35,8 @@ class OneBall:
         print("Collide.")
         self.ballSpeedX = - self.ballSpeedX
         self.ballSpeedY = - self.ballSpeedY
-        self.x = self.x + self.ballSpeedX * 8  #when collide,they back in 10 times speed
-        self.y = self.y + self.ballSpeedY * 8
-
+        self.x = self.x + self.ballSpeedX * 10  #when collide,they back in 10 times speed
+        self.y = self.y + self.ballSpeedY * 10
     
 
 size = width, height = 1024, 680
@@ -46,7 +47,7 @@ pygame.display.set_caption('Ball Game') #  主窗口标题（Title）
 ball001 = OneBall(2,2,320,240,(162,56,31))
 ball002 = OneBall(3,4,200,100,(255,255,255))
 ball003 = OneBall(-2,-3,450,330,(0,255,0))
-ball004 = OneBall(6,2,90,110,(0,0,255))
+ball004 = OneBall(6,2,290,110,(0,0,255))
 isRunning = True
 while isRunning:
   for event in pygame.event.get():
