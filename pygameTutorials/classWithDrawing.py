@@ -44,10 +44,11 @@ backgroundColor = (104,183,150)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Ball Game') #  主窗口标题（Title）
 
-ball001 = OneBall(2,2,320,240,(162,56,31))
-ball002 = OneBall(3,4,200,100,(255,255,255))
-ball003 = OneBall(-2,-3,450,330,(0,255,0))
-ball004 = OneBall(6,2,290,110,(0,0,255))
+ball001 = OneBall(2,2,320,240,(255,51,51))  # Red
+ball002 = OneBall(3,4,200,100,(255,255,255))  # White
+ball003 = OneBall(-2,-3,450,330,(0,255,0))  # Green
+ball004 = OneBall(6,2,290,110,(0,0,255))  # Blue
+ball005 = OneBall(-4,5,680,520,(255,255,51))  # Yellow
 isRunning = True
 while isRunning:
   for event in pygame.event.get():
@@ -58,11 +59,13 @@ while isRunning:
   ball002.draw()
   ball003.draw()
   ball004.draw()
+  ball005.draw()
 
   ball001.move()
   ball002.move()
   ball003.move()
   ball004.move()
+  ball005.move()
 
   ball002.collide(ball001)  # I realize that more balls more collide for two of them.
   ball001.collide(ball002)
@@ -78,6 +81,15 @@ while isRunning:
   ball001.collide(ball004)
   ball002.collide(ball004)
   ball003.collide(ball004)
+
+  ball005.collide(ball001)  # Add the fifth ball, more collide
+  ball005.collide(ball002)
+  ball005.collide(ball003)
+  ball005.collide(ball004)
+  ball001.collide(ball005)
+  ball002.collide(ball005)
+  ball003.collide(ball005)
+  ball004.collide(ball005)
 
   time.sleep(0.009)
   pygame.display.flip()  # 刷新整个界面显示  # pygame.display.update(_) 刷新指定部分显示
