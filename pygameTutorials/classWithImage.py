@@ -41,6 +41,9 @@ pygame.display.set_caption('Ball Game') #  主窗口标题（Title）
 ball001 = OneBall("soccer.png",4,3,520,340)
 ball002 = OneBall("basketball.png",3,-4,200,100)
 ball003 = OneBall("baseball.png",-3,4,700,400)
+ball004 = OneBall("tennis.png",-4,-5,320,600)
+ball005 = OneBall("volleyball.png",-2,2,210,400)
+
 isRunning = True
 while isRunning:
   for event in pygame.event.get():
@@ -50,10 +53,14 @@ while isRunning:
   ball001.blit(screen)
   ball002.blit(screen)
   ball003.blit(screen)
+  ball004.blit(screen)
+  ball005.blit(screen)
 
   ball001.move()
   ball002.move()
   ball003.move()
+  ball004.move()
+  ball005.move()
 
   ball001.collide(ball002)
   ball002.collide(ball001)
@@ -62,6 +69,22 @@ while isRunning:
   ball003.collide(ball002)
   ball001.collide(ball003)
   ball002.collide(ball003)
+
+  ball004.collide(ball001)  # Add the fourth ball, add collide
+  ball004.collide(ball002)
+  ball004.collide(ball003)
+  ball001.collide(ball004)
+  ball002.collide(ball004)
+  ball003.collide(ball004)
+
+  ball005.collide(ball001)  # Add the fifth ball, add collide
+  ball005.collide(ball002)
+  ball005.collide(ball003)
+  ball005.collide(ball004)
+  ball001.collide(ball005)
+  ball002.collide(ball005)
+  ball003.collide(ball005)
+  ball004.collide(ball005)
 
   time.sleep(0.005)
   pygame.display.flip()  # 刷新整个界面显示  # pygame.display.update(_) 刷新指定部分显示
