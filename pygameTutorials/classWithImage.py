@@ -14,30 +14,31 @@ class OneBall:
   def move(self):
       if self.rect.left <= 0 or self.rect.right >= width:     
         self.ballSpeedX = - self.ballSpeedX
+        self.rect.x = self.rect.x + self.ballSpeedX * 9
       if self.rect.top <= 0 or self.rect.bottom >= height:   
         self.ballSpeedY = - self.ballSpeedY
+        self.rect.y = self.rect.y + self.ballSpeedY * 9
 
       self.rect.x = self.rect.x + self.ballSpeedX
       self.rect.y = self.rect.y + self.ballSpeedY
 
-#   def collide(self, OneBall):
-    
-#       if self.ball.colliderect(OneBall.ball):
-#         print("Collide.")
-#         self.ballSpeedX = - self.ballSpeedX
-#         self.ballSpeedY = - self.ballSpeedY
-#         self.x = self.x + self.ballSpeedX * 10  #when collide,they back in 10 times speed
-#         self.y = self.y + self.ballSpeedY * 10
+  def collide(self, OneBall):   
+      if self.rect.colliderect(OneBall.rect):
+        print("Collide.")
+        self.ballSpeedX = - self.ballSpeedX
+        self.ballSpeedY = - self.ballSpeedY
+        self.rect.x = self.rect.x + self.ballSpeedX * 10  #when collide,they back in 10 times speed
+        self.rect.y = self.rect.y + self.ballSpeedY * 10
 
   def blit(self, screen):
     screen.blit(self.picture, self.rect)
 
-size = width, height = 940, 680
+size = width, height = 1040, 780
 backgroundColor = (104,183,150)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Ball Game') #  主窗口标题（Title）
 
-ball001 = OneBall("soccer.png",2,2,320,240)
+ball001 = OneBall("soccer.png",4,3,520,340)
 ball002 = OneBall("basketball.png",3,4,200,100)
 isRunning = True
 while isRunning:
@@ -46,13 +47,14 @@ while isRunning:
   screen.fill(backgroundColor)
 
   ball001.blit(screen)
-  ball001.move()
-
   ball002.blit(screen)
+
+  ball001.move()
   ball002.move()
 
-#   ball002.collide(ball001)
+  ball001.collide(ball002)
+  ball002.collide(ball001)
 #   ball001.collide(ball002)
 
-  time.sleep(0.009)
+  time.sleep(0.005)
   pygame.display.flip()  # 刷新整个界面显示  # pygame.display.update(_) 刷新指定部分显示
