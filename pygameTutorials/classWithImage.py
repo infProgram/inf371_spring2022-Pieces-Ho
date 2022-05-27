@@ -40,6 +40,7 @@ pygame.display.set_caption('Ball Game') #  主窗口标题（Title）
 
 ball001 = OneBall("soccer.png",4,3,520,340)
 ball002 = OneBall("basketball.png",3,4,200,100)
+ball003 = OneBall("baseball.png",5,4,700,400)
 isRunning = True
 while isRunning:
   for event in pygame.event.get():
@@ -48,9 +49,11 @@ while isRunning:
 
   ball001.blit(screen)
   ball002.blit(screen)
+  ball003.blit(screen)
 
   ball001.move()
   ball002.move()
+  ball003.move()
 
   ball001.collide(ball002)
   ball002.collide(ball001)
