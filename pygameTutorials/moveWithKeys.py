@@ -27,6 +27,9 @@ while isRunning:
   if keyPressed[pygame.K_d]: ball_rect.x = ball_rect.x + speedX
   screen.fill(backgroundColor)
 
+  if ball_rect.left <= 0 or ball_rect.right >= width:  ASx = - ASx
+  if ball_rect.top <= 0 or ball_rect.bottom >= height:   ASy = - ASy
+
   screen.blit(ball_key,ball_rect)
 
   time.sleep(0.002)
