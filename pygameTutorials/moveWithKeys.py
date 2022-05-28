@@ -31,7 +31,8 @@ class OneBall:
         self.rect.y = self.rect.y + self.ballSpeedY * 10
 
   def blit(self, screen):
-    screen.blit(self.picture, self.rect)
+      screen.blit(self.picture, self.rect)
+      
 
 size = width, height = 1040, 780
 backgroundColor = (104,183,150)
@@ -39,8 +40,9 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Ball Game') #  主窗口标题（Title）
 
 ball001 = OneBall("soccer.png",4,3,520,340)
-# ball002 = OneBall("basketball.png",3,-4,200,100)
+ball002 = OneBall("basketball.png",3,-4,700,100)
 
+# key ball
 site = x,y = 200,100
 speed = speedxX,speedY = 3,-4
 ball_key = pygame.image.load("basketball.png")
@@ -52,11 +54,12 @@ isRunning = True
 while isRunning:
   for event in pygame.event.get():
     if (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE) or event.type == pygame.QUIT: sys.exit()
-    if event.type == pygame.KEYDOWN:
-        if event.key == pygame.K_w: ball_rect.y = ball_rect.y - 10
-        if event.key == pygame.K_s: ball_rect.y = ball_rect.y + 10
-        if event.key == pygame.K_a: ball_rect.x = ball_rect.x - 10
-        if event.key == pygame.K_d: ball_rect.x = ball_rect.x + 10
+    # control key ball
+  keyPressed =  pygame.key.get_pressed()
+  if keyPressed[pygame.K_w]: ball_rect.y = ball_rect.y - 3
+  if keyPressed[pygame.K_s]: ball_rect.y = ball_rect.y + 3
+  if keyPressed[pygame.K_a]: ball_rect.x = ball_rect.x - 3
+  if keyPressed[pygame.K_d]: ball_rect.x = ball_rect.x + 3
   screen.fill(backgroundColor)
 
   
@@ -73,5 +76,5 @@ while isRunning:
 #   ball002.collide(ball001)
 
 
-  time.sleep(0.005)
+  time.sleep(0.003)
   pygame.display.flip()  # 刷新整个界面显示  # pygame.display.update(_) 刷新指定部分显示
