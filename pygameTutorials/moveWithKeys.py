@@ -39,22 +39,38 @@ screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Ball Game') #  主窗口标题（Title）
 
 ball001 = OneBall("soccer.png",4,3,520,340)
-ball002 = OneBall("basketball.png",3,-4,200,100)
+# ball002 = OneBall("basketball.png",3,-4,200,100)
+
+site = x,y = 200,100
+speed = speedxX,speedY = 3,-4
+ball_key = pygame.image.load("basketball.png")
+ball_rect =ball_key.get_rect()
+ball_rect.x = x
+ball_rect.y = y
 
 isRunning = True
 while isRunning:
   for event in pygame.event.get():
     if (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE) or event.type == pygame.QUIT: sys.exit()
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_w: ball_rect.y = ball_rect.y - 10
+        if event.key == pygame.K_s: ball_rect.y = ball_rect.y + 10
+        if event.key == pygame.K_a: ball_rect.x = ball_rect.x - 10
+        if event.key == pygame.K_d: ball_rect.x = ball_rect.x + 10
   screen.fill(backgroundColor)
 
+  
   ball001.blit(screen)
-  ball002.blit(screen)
-
   ball001.move()
-  ball002.move()
 
-  ball001.collide(ball002)
-  ball002.collide(ball001)
+  screen.blit(ball_key,ball_rect)
+
+
+#   ball002.blit(screen)
+#   ball002.move()
+
+#   ball001.collide(ball002)
+#   ball002.collide(ball001)
 
 
   time.sleep(0.005)
