@@ -19,16 +19,17 @@ isRunning = True
 while isRunning:
   for event in pygame.event.get():
     if (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE) or event.type == pygame.QUIT: sys.exit()
-    # control key ball
+#   control key ball
   keyPressed =  pygame.key.get_pressed()
   if keyPressed[pygame.K_w]: ball_rect.y = ball_rect.y - speedY
   if keyPressed[pygame.K_s]: ball_rect.y = ball_rect.y + speedY
   if keyPressed[pygame.K_a]: ball_rect.x = ball_rect.x - speedX
   if keyPressed[pygame.K_d]: ball_rect.x = ball_rect.x + speedX
+  speedX = speedY = 3
   screen.fill(backgroundColor)
 
-  if ball_rect.left <= 0 or ball_rect.right >= width:  ASx = - ASx
-  if ball_rect.top <= 0 or ball_rect.bottom >= height:   ASy = - ASy
+  if ball_rect.left <= 0 or ball_rect.right >= width:  speedX = - speedX
+  if ball_rect.top <= 0 or ball_rect.bottom >= height:   speedY = - speedY
 
   screen.blit(ball_key,ball_rect)
 
