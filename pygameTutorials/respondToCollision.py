@@ -17,6 +17,12 @@ while isRunning:
     if (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE) or event.type == pygame.QUIT: sys.exit()
   screen.fill(backgroundColor)
 
+  font = pygame.font.SysFont('Verdana',40)
+  text = font.render('Press ESC to exit', True, (192, 192, 192), (104,183,150))
+  screen.blit(text, (150, 150))
+
+
+
   ballA = pygame.draw.circle(screen, (162,56,31), [Ax,Ay], 40, width=0)
   ballA_Frame = pygame.draw.circle(screen, (0,0,0), [Ax,Ay], 40, width=5)
   ballB = pygame.draw.circle(screen, (255,255,255), [Bx,By], 40, width=0)
@@ -31,21 +37,25 @@ while isRunning:
   Ax = Ax + ASx
   Ay = Ay + ASy
 
-  if ballB.left <= 0 or ballB.right >= width:  BSx = - BSx
-  if ballB.top <= 0 or ballB.bottom >= height:   BSy = - BSy
+  if ballB.left <= 0 or ballB.right >= width:  
+      BSx = - BSx
+      Bx = Bx + BSx * 4
+  if ballB.top <= 0 or ballB.bottom >= height:   
+      BSy = - BSy
+      By = By + BSy * 4
   Bx = Bx + BSx
   By = By + BSy
 
   if ballA.colliderect(ballB):
     print("Collide.")
-    ASx = random.choice((-1, 1))* random.randint(2,5)
-    ASy = random.choice((-1, 1))* random.randint(2,5)
-    BSx = random.choice((-1, 1))* random.randint(2,5)
-    BSy = random.choice((-1, 1))* random.randint(2,5)
+    ASx = random.choice((-1, 1))* random.randint(2,4)
+    ASy = random.choice((-1, 1))* random.randint(2,4)
+    BSx = random.choice((-1, 1))* random.randint(2,4)
+    BSy = random.choice((-1, 1))* random.randint(2,4)
     Ax = Ax + ASx * 5  #when collide,they back in 5 times speed
     Ay = Ay + ASy * 5
     Bx = Bx + BSx * 5  
     By = By + BSy * 5
 
-  time.sleep(0.005)
+  time.sleep(0.007)
   pygame.display.flip()  # 刷新整个界面显示  # pygame.display.update(_) 刷新指定部分显示
