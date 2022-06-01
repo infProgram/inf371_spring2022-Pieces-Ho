@@ -33,11 +33,18 @@ while isRunning:
     if moving:
         ball_rect.centerx,ball_rect.centery = pygame.mouse.get_pos()
 
-  speedX = speedY = 3
+  speedX = speedY = 2
   screen.fill(backgroundColor)
 
-  if ball_rect.left <= 0 or ball_rect.right >= width:  speedX = - speedX
-  if ball_rect.top <= 0 or ball_rect.bottom >= height:   speedY = - speedY
+  if ball_rect.left <= 0 or ball_rect.right >= width:  
+      speedX = - speedX
+      ball_rect.x = ball_rect.x + 5 * speedX
+  if ball_rect.top <= 0 or ball_rect.bottom >= height:   
+      speedY = - speedY
+      ball_rect.y = ball_rect.y + 5 * speedY
+
+  ball_rect.x = ball_rect.x + speedX
+  ball_rect.y = ball_rect.y + speedY
 
   screen.blit(ball_key,ball_rect)
 
