@@ -16,6 +16,7 @@ ball_key = pygame.image.load("basketball.png")
 ball_rect =ball_key.get_rect()
 ball_rect.x = x
 ball_rect.y = y
+speedX = speedY = 2
 
 moving = False
 
@@ -33,7 +34,7 @@ while isRunning:
     if moving:
         ball_rect.centerx,ball_rect.centery = pygame.mouse.get_pos()
 
-  speedX = speedY = 2
+  
   screen.fill(backgroundColor)
 
   if ball_rect.left <= 0 or ball_rect.right >= width:  
