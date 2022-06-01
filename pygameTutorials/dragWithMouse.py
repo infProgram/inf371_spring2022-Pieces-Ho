@@ -17,16 +17,22 @@ ball_rect =ball_key.get_rect()
 ball_rect.x = x
 ball_rect.y = y
 
+moving = False
+
 isRunning = True
 while isRunning:
   for event in pygame.event.get():
     if (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE) or event.type == pygame.QUIT: sys.exit()
-#   control key ball
-  keyPressed =  pygame.key.get_pressed()
-  if keyPressed[pygame.K_w]: ball_rect.y = ball_rect.y - speedY
-  if keyPressed[pygame.K_s]: ball_rect.y = ball_rect.y + speedY
-  if keyPressed[pygame.K_a]: ball_rect.x = ball_rect.x - speedX
-  if keyPressed[pygame.K_d]: ball_rect.x = ball_rect.x + speedX
+
+    if event.type == pygame.MOUSEBUTTONDOWN:	
+        if event.button == 1: # 点击鼠标左键
+            moving = True
+    if event.type == pygame.MOUSEBUTTONUP: # 获取松开鼠标事件
+        if event.button == 1: # 松开鼠标左键
+            moving = False
+    if moving:
+        ball_rect.x,ball_rect.y = pygame.mouse.get_pos()
+
   speedX = speedY = 3
   screen.fill(backgroundColor)
 
