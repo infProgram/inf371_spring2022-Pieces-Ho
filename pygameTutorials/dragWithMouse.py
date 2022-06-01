@@ -31,7 +31,7 @@ while isRunning:
         if event.button == 1: # 松开鼠标左键
             moving = False
     if moving:
-        ball_rect.x,ball_rect.y = pygame.mouse.get_pos()
+        ball_rect.centerx,ball_rect.centery = pygame.mouse.get_pos()
 
   speedX = speedY = 3
   screen.fill(backgroundColor)
