@@ -1,4 +1,4 @@
-import sys, pygame, time
+import sys, pygame, time, random
 pygame.init()
 
 size = width, height = 640, 480
@@ -22,8 +22,12 @@ while isRunning:
   ballB = pygame.draw.circle(screen, (255,255,255), [Bx,By], 40, width=0)
   ballB_Frame = pygame.draw.circle(screen, (0,0,0), [Bx,By], 40, width=5)
 
-  if ballA.left <= 0 or ballA.right >= width:  ASx = - ASx
-  if ballA.top <= 0 or ballA.bottom >= height:   ASy = - ASy
+  if ballA.left <= 0 or ballA.right >= width:  
+      ASx = - ASx
+      Ax = Ax + ASx * 4
+  if ballA.top <= 0 or ballA.bottom >= height:   
+      ASy = - ASy
+      Ay = Ay + ASy * 4
   Ax = Ax + ASx
   Ay = Ay + ASy
 
@@ -34,14 +38,14 @@ while isRunning:
 
   if ballA.colliderect(ballB):
     print("Collide.")
-    ASx = - ASx
-    ASy = - ASy
-    BSx = - BSx
-    BSy = - BSy
-    Ax = Ax + ASx * 9  #when collide,they back in 10 times speed
-    Ay = Ay + ASy * 9
-    Bx = Bx + BSx * 9  
-    By = By + BSy * 9
+    ASx = random.choice((-1, 1))* random.randint(2,5)
+    ASy = random.choice((-1, 1))* random.randint(2,5)
+    BSx = random.choice((-1, 1))* random.randint(2,5)
+    BSy = random.choice((-1, 1))* random.randint(2,5)
+    Ax = Ax + ASx * 5  #when collide,they back in 5 times speed
+    Ay = Ay + ASy * 5
+    Bx = Bx + BSx * 5  
+    By = By + BSy * 5
 
-  time.sleep(0.009)
+  time.sleep(0.005)
   pygame.display.flip()  # 刷新整个界面显示  # pygame.display.update(_) 刷新指定部分显示
