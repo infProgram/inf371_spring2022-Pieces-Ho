@@ -6,13 +6,15 @@ class launcher():
         self.speed = 20
         self.x = 200
         self.y = 660
+        self.tankColour = (154,205,50)
+        self.bulletColour = (238,201,0)
         self.points = [(self.x,self.y),(self.x+20,self.y),(self.x+20,self.y-20),(self.x+40,self.y-20),(self.x+40,self.y),(self.x+60,self.y),(self.x+60,self.y+20),(self.x,self.y+20)]
-        self.tank = pygame.draw.polygon(screen, (102,153,102),self.points)
-        self.tankFrame = pygame.draw.polygon(screen, (46,139,87), self.points, width=2)
 
     def draw(self):
-        self.tank = pygame.draw.polygon(screen, (102,153,102),self.points)
+        self.tank = pygame.draw.polygon(screen, self.tankColour,self.points)
         self.tankFrame = pygame.draw.polygon(screen, (46,139,87), self.points, width=2)
+        self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.x+20,self.y-40,20,20],0)
+        self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.x+20,self.y-40,20,20],1)
     def move(self,key):
         if key == 'W': pass
         if key == 'A': self.x = self.x - self.speed
@@ -49,5 +51,5 @@ while isRunning:
 
   mylancher.draw()
 
-  time.sleep(0.01)
+  time.sleep(0.005)
   pygame.display.flip()  # 刷新整个界面显示
