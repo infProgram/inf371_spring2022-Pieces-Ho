@@ -1,4 +1,4 @@
-import sys, pygame, time
+import sys, pygame, time, random
 pygame.init()
 # launcher class
 class launcher():
@@ -62,9 +62,15 @@ class bullet():
 class wall():
     def __init__(self) -> None:
         self.wallColour = (139,58,58)
+        list = range(0,460,20)
+        self.positions = random.sample(list, 15)
+        # self.pos = random.randrange(0,460,20)
+        print(self.positions)
+
+
     def draw(self):     # 13 grids each line
-        for i in range(0,100,20):
-            for j in range(0,460,20):
+        for i in range(0,120,20):
+            for j in self.positions:
                 self.bullet = pygame.draw.rect(screen,self.wallColour,[j,i,20,20],0)
         
     def move(self):
@@ -80,6 +86,7 @@ backgroundPic = pygame.image.load("bgPic.png")
 mylancher = launcher()
 mywall = wall()
 
+
 isRunning = True
 while isRunning:
   for event in pygame.event.get():
@@ -93,19 +100,19 @@ while isRunning:
         if keyPressed[pygame.K_a]: mylancher.move('A')
         if keyPressed[pygame.K_d]: mylancher.move('D')
   screen.blit(backgroundPic,(0,0))
-#   for i in range(20,441,20): pygame.draw.line(screen,(112,128,144),[i,0],[i,680],1) # Draw xy lines
-#   for i in range(20,681,20): pygame.draw.line(screen,(112,128,144),[0,i],[460,i],1)
+
 
   
-#   if  mylancher.bullety >0: 
-#      mylancher.bulletFly()
+
   mywall.draw()
 
   for i in range(20,441,20): pygame.draw.line(screen,(112,128,144),[i,0],[i,680],1) # Draw xy lines
   for i in range(20,681,20): pygame.draw.line(screen,(112,128,144),[0,i],[460,i],1)
 
   mylancher.draw()  # lancher without xy lines
+  #   if  mylancher.bullety >0: 
+  #      mylancher.bulletFly()
 
 
-  time.sleep(0.01)
+  time.sleep(0.1)
   pygame.display.flip()  # 刷新整个界面显示
