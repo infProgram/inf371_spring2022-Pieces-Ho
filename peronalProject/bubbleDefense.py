@@ -16,20 +16,22 @@ class launcher():
     def draw(self):
         self.tank = pygame.draw.polygon(screen, self.tankColour,self.points)
         self.tankFrame = pygame.draw.polygon(screen, (46,139,87), self.points, width=2)
-        self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.bulletx,self.bullety,20,20],0)
-        self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
-    def drawBullet(self):
-        self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.bulletx,self.bullety,20,20],0)
-        self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
-        pass
+        # self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.bulletx,self.bullety,20,20],0)
+        # self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
+    # def drawBullet(self):
+    #     self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.bulletx,self.bullety,20,20],0)
+    #     self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
 
 
     def move(self,key):
-        if key == 'W':  self.drawBullet()
+        if key == 'W':  
+            mybullet = bullet(self.x,self.y)
+            mybullet.drawBullet()
+            print("W be pressed!")
+            
         if key == 'A': self.x = self.x - self.speed
         if key == 'D': self.x = self.x + self.speed
       
-
         if self.x <= 0 :  self.x = 0
         if self.x >= width-60: self.x = width-60
         self.points = [(self.x,self.y),(self.x+20,self.y),(self.x+20,self.y-20),(self.x+40,self.y-20),(self.x+40,self.y),(self.x+60,self.y),(self.x+60,self.y+20),(self.x,self.y+20)]
@@ -39,8 +41,33 @@ class launcher():
         print("x: ",self.bulletx, ",y: ",self.bullety)
 
 
+class bullet():
+    def __init__(self,x,y) -> None:
+        self.bulletSpeed = 10
+        self.bulletx = x+20
+        self.bullety = y-20
+        self.bulletColour = (238,201,0)
+        self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.bulletx,self.bullety,20,20],0)
+        self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
 
+    def drawBullet(self):
+        self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.bulletx,self.bullety,20,20],0)
+        self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
 
+    def bulletFly(self):
+        self.bullety = self.bullety - self.bulletSpeed
+        print("x: ",self.bulletx, ",y: ",self.bullety)
+        
+
+class wall():
+    def __init__(self) -> None:
+        pass
+    def draw(self):
+        pass
+    def move(self):
+        pass
+    def clear(self):
+        pass
 
 
 size = width, height = 460, 680
@@ -56,8 +83,9 @@ while isRunning:
     if event.type == pygame.KEYDOWN:
         keyPressed =  pygame.key.get_pressed()
         if keyPressed[pygame.K_w]: 
-            mylancher.drawBullet()
-            mylancher.move('W')
+            mybullet = bullet(mylancher.x,mylancher.y)
+            mybullet.drawBullet()
+            # mylancher.move('W')
         if keyPressed[pygame.K_a]: mylancher.move('A')
         if keyPressed[pygame.K_d]: mylancher.move('D')
   screen.blit(backgroundPic,(0,0))
@@ -65,7 +93,8 @@ while isRunning:
   for i in range(20,681,20): pygame.draw.line(screen,(112,128,144),[0,i],[460,i],1)
 
   mylancher.draw()
-  mylancher.bulletFly()
+#   if  mylancher.bullety >0: 
+#      mylancher.bulletFly()
 
   time.sleep(0.01)
   pygame.display.flip()  # 刷新整个界面显示
