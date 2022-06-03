@@ -65,19 +65,21 @@ class wall():
         self.posx = [random.sample(range(0,460,20),15),random.sample(range(0,460,20),random.randint(12, 15)),random.sample(range(0,460,20),13),random.sample(range(0,460,20),14),random.sample(range(0,460,20),15)]
 
     def draw(self):     # 23 grids each line, and 34 lines, 34-2 = 32
-        for i in range(0,len(self.posx)):      
+        for i in range(len(self.posx)):      
             for j in self.posx[i]:
                 self.walls = pygame.draw.rect(screen,self.wallColour,[j,i*20,20,20],0)
         if len(self.posx) >=  32:
             print("Game over!")
             sys.exit()
-
         
     def move(self):
         self.posx.insert(0,random.sample(range(0,460,20),random.randint(12, 15)))
-        print("moving: ", len(self.posx))
-    def clear(self):
-        pass
+
+    def clearline(self):
+        for i in range(0,len(self.posx)):      
+            if len(self.posx[i]) == 23:
+                del self.posx[i]
+                
 
 
 size = width, height = 460, 680
@@ -87,9 +89,6 @@ backgroundPic = pygame.image.load("bgPic.png")
 mylancher = launcher()
 mywall = wall()
 smallWhile = 0
-
-
-
 
 isRunning = True
 while isRunning:
@@ -105,15 +104,11 @@ while isRunning:
         if keyPressed[pygame.K_d]: mylancher.move('D')
   screen.blit(backgroundPic,(0,0))
 
-  if smallWhile > 50 and smallWhile < 52:  # make a smaller while
+  if smallWhile == 50:  # make a smaller while
       mywall.move()
       pygame.draw.circle(screen, (0,0,0), [250, 200], 40, width=0)
-      
-      smallWhile = smallWhile+1
-  if smallWhile >= 52:
       smallWhile = 0
   smallWhile = smallWhile+1
-#   print("SmW: " , smallWhile)
 
 
   mywall.draw()
