@@ -62,16 +62,16 @@ class bullet():
 class wall():
     def __init__(self) -> None:
         self.wallColour = (139,58,58)
-        list = range(0,460,20)
-        self.positions = random.sample(list, 15)
-        # self.pos = random.randrange(0,460,20)
-        print(self.positions)
+        self.posx = [random.sample(range(0,460,20), 15),random.sample(range(0,460,20), 15),random.sample(range(0,460,20), 15),random.sample(range(0,460,20), 15)]
+        self.lines = len(self.posx)
+        print(self.lines)
 
 
     def draw(self):     # 13 grids each line
-        for i in range(0,120,20):
-            for j in self.positions:
-                self.bullet = pygame.draw.rect(screen,self.wallColour,[j,i,20,20],0)
+        for i in range(0,self.lines):
+            print("i: ",i)
+            for j in self.posx[i]:
+                self.walls = pygame.draw.rect(screen,self.wallColour,[j,i*20,20,20],0)
         
     def move(self):
         pass
@@ -85,7 +85,7 @@ pygame.display.set_caption('Bubble Defense') #  主窗口标题（Title）
 backgroundPic = pygame.image.load("bgPic.png")
 mylancher = launcher()
 mywall = wall()
-
+smallWhile = 0
 
 isRunning = True
 while isRunning:
@@ -101,8 +101,13 @@ while isRunning:
         if keyPressed[pygame.K_d]: mylancher.move('D')
   screen.blit(backgroundPic,(0,0))
 
+#   if smallWhile == 100:  # make a smaller while
+#       mywall.draw()
+#       pygame.draw.circle(screen, (0,0,0), [250, 200], 40, width=0)
+#       smallWhile = 0
+#   smallWhile = smallWhile+1
+#   print("SmW: " , smallWhile)
 
-  
 
   mywall.draw()
 
@@ -114,5 +119,5 @@ while isRunning:
   #      mylancher.bulletFly()
 
 
-  time.sleep(0.1)
+  time.sleep(0.01)
   pygame.display.flip()  # 刷新整个界面显示
