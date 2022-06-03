@@ -62,7 +62,7 @@ class bullet():
 class wall():
     def __init__(self) -> None:
         self.wallColour = (139,58,58)
-        self.posx = [random.sample(range(0,460,20), 15),random.sample(range(0,460,20), 15),random.sample(range(0,460,20), 15),random.sample(range(0,460,20), 15)]
+        self.posx = [random.sample(range(0,460,20),15),random.sample(range(0,460,20),15),random.sample(range(0,460,20),15),random.sample(range(0,460,20),15),random.sample(range(0,460,20),15)]
         self.lines = len(self.posx)
         print(self.lines)
 
