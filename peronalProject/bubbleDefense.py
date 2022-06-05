@@ -1,8 +1,8 @@
 from re import T
 import sys, pygame, time, random
 pygame.init()
-# launcher class
-class launcher():
+
+class launcher():   # launcher class
     def __init__(self) -> None:    
         self.speed = 20
         self.x = 200
@@ -17,12 +17,6 @@ class launcher():
     def draw(self):
         self.tank = pygame.draw.polygon(screen, self.tankColour,self.points)
         self.tankFrame = pygame.draw.polygon(screen, (46,139,87), self.points, width=2)
-        # self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.bulletx,self.bullety,20,20],0)
-        # self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
-    # def drawBullet(self):
-    #     self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.bulletx,self.bullety,20,20],0)
-    #     self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
-
 
     def move(self,key):
         if key == 'A': self.x = self.x - self.speed
@@ -31,12 +25,9 @@ class launcher():
         if self.x <= 0 :  self.x = 0
         if self.x >= width-60: self.x = width-60
         self.points = [(self.x,self.y),(self.x+20,self.y),(self.x+20,self.y-20),(self.x+40,self.y-20),(self.x+40,self.y),(self.x+60,self.y),(self.x+60,self.y+20),(self.x,self.y+20)]
-    # def bulletFly(self):
-    #     self.bullety = self.bullety - self.bulletSpeed
-    #     print("x: ",self.bulletx, ",y: ",self.bullety)
 
 
-class bullet():
+class bullet():   # bullet class
     def __init__(self) -> None:
         self.bulletSpeed = 40
         self.bulletx = 0
@@ -80,6 +71,8 @@ class wall():
             if len(self.posx[i]) == 23:
                 del self.posx[i]
                 
+    def addPiece():
+        pass
 
 
 size = width, height = 460, 680
