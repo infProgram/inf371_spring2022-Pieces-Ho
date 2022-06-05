@@ -52,14 +52,11 @@ class bullet():
         self.bullet = pygame.draw.rect(screen,self.bulletColour,[x+20,y-20,20,20],0)
         self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
 
-    def drawBullet(self):
-        print("draw!")
-        self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.bulletx,self.bullety,20,20],0)
-        self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
-
-    def bulletFly(self):
+    def bulletFlyDraw(self):
         self.bullety = self.bullety - self.bulletSpeed
         print("x: ",self.bulletx, ",y: ",self.bullety)
+        self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.bulletx,self.bullety,20,20],0)
+        self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
         
 
 class wall():
@@ -120,10 +117,8 @@ while isRunning:
   mylancher.draw()  # Draw lancher without xy lines
 
   if  mybullet.bullety >0 and boolBulletFly == True: 
-      mybullet.bulletFly()
-      mybullet.drawBullet()
-  if  mybullet.bullety <= 0:
-      boolBulletFly == False
+      mybullet.bulletFlyDraw()
+  if  mybullet.bullety <= 0:    boolBulletFly == False
   
 
 
