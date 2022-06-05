@@ -123,7 +123,6 @@ while isRunning:
       mybullet.bulletFly()
       mybullet.drawBullet()
   if  mybullet.bullety <= 0:
-      mybullet.startBullet(mylancher.x,mylancher.y)
       boolBulletFly == False
   
 
