@@ -1,3 +1,4 @@
+from re import T
 import sys, pygame, time, random
 pygame.init()
 # launcher class
@@ -36,16 +37,23 @@ class launcher():
 
 
 class bullet():
-    def __init__(self,x,y) -> None:
-        self.bulletSpeed = 10
-        self.bulletx = x+20
-        self.bullety = y-20
+    def __init__(self) -> None:
+        self.bulletSpeed = 40
+        self.bulletx = 0
+        self.bullety = 0
         self.bulletColour = (238,201,0)
         self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.bulletx,self.bullety,20,20],0)
         self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
 
+    def startBullet(self,x,y):
+        print("press W! ")
+        self.bulletx = x+20
+        self.bullety = y-20
+        self.bullet = pygame.draw.rect(screen,self.bulletColour,[x+20,y-20,20,20],0)
+        self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
+
     def drawBullet(self):
-        print("Press W!")
+        print("draw!")
         self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.bulletx,self.bullety,20,20],0)
         self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
 
@@ -83,8 +91,9 @@ pygame.display.set_caption('Bubble Defense') #  主窗口标题（Title）
 backgroundPic = pygame.image.load("bgPic.png")
 mylancher = launcher()
 mywall = wall()
-mybullet = bullet(mylancher.x,mylancher.y)
+mybullet = bullet()
 wallWhile = 0
+boolBulletFly = False
 
 isRunning = True
 while isRunning:
@@ -93,7 +102,8 @@ while isRunning:
     if event.type == pygame.KEYDOWN: 
         keyPressed =  pygame.key.get_pressed()
         if keyPressed[pygame.K_w]: 
-            mybullet.drawBullet()
+            mybullet.startBullet(mylancher.x,mylancher.y)
+            boolBulletFly = True
         if keyPressed[pygame.K_a]: mylancher.move('A')
         if keyPressed[pygame.K_d]: mylancher.move('D')
   screen.blit(backgroundPic,(0,0))
@@ -109,9 +119,14 @@ while isRunning:
 
   mylancher.draw()  # Draw lancher without xy lines
 
-  #   if  mylancher.bullety >0: 
-  #      mylancher.bulletFly()
+  if  mybullet.bullety >0 and boolBulletFly == True: 
+      mybullet.bulletFly()
+      mybullet.drawBullet()
+  if  mybullet.bullety <= 0:
+      mybullet.startBullet(mylancher.x,mylancher.y)
+      boolBulletFly == False
+  
 
 
-  time.sleep(0.5)
+  time.sleep(0.05)
   pygame.display.flip()  # 刷新整个界面显示
