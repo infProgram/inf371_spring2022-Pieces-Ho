@@ -22,8 +22,8 @@ class launcher():   # launcher class
         if key == 'A': self.x = self.x - self.speed
         if key == 'D': self.x = self.x + self.speed
       
-        if self.x <= 0 :  self.x = 0
-        if self.x >= width-60: self.x = width-60
+        if self.x < -21 :  self.x = -20
+        if self.x > width-40: self.x = width-40
         self.points = [(self.x,self.y),(self.x+20,self.y),(self.x+20,self.y-20),(self.x+40,self.y-20),(self.x+40,self.y),(self.x+60,self.y),(self.x+60,self.y+20),(self.x,self.y+20)]
 
 
@@ -45,7 +45,7 @@ class bullet():   # bullet class
 
     def bulletFlyDraw(self):
         self.bullety = self.bullety - self.bulletSpeed
-        # print("x: ",self.bulletx, ",y: ",self.bullety)
+        print("x: ",self.bulletx, ",y: ",self.bullety)
         self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.bulletx,self.bullety,20,20],0)
         self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
         
@@ -57,8 +57,8 @@ class wall():
 
     def draw(self):     # 23 grids each line, and 34 lines, 34-2 = 32
         for i in range(len(self.posx)):      
-            print("Line: ",i)
-            print("in: ",self.posx[i])
+            # print("Line: ",i, end="  ")
+            # print("in: ",self.posx[i])
             for j in self.posx[i]:
                 self.walls = pygame.draw.rect(screen,self.wallColour,[j,i*20,20,20],0)
         if len(self.posx) >=  32:
