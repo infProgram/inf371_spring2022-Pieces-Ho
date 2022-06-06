@@ -29,7 +29,7 @@ class launcher():   # launcher class
 
 class bullet():   # bullet class
     def __init__(self) -> None:
-        self.bulletSpeed = 40
+        self.bulletSpeed = 20
         self.bulletx = 0
         self.bullety = 0
         self.bulletColour = (238,201,0)
@@ -45,7 +45,7 @@ class bullet():   # bullet class
 
     def bulletFlyDraw(self):
         self.bullety = self.bullety - self.bulletSpeed
-        print("x: ",self.bulletx, ",y: ",self.bullety)
+        # print("x: ",self.bulletx, ",y: ",self.bullety)
         self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.bulletx,self.bullety,20,20],0)
         self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
         
@@ -70,9 +70,17 @@ class wall():
         for i in range(0,len(self.posx)):      
             if len(self.posx[i]) == 23:
                 del self.posx[i]
+
+    def addPiece(self,x,y):
+        print("x: ",x, ",y: ",y)
+        boolFly = True
+        for i in range(len(self.posx)):      
+            for j in self.posx[i]:
+                if x == j  and y == i*20 : 
+                    boolFly = False
+                    
                 
-    def addPiece():
-        pass
+        return boolFly
 
 
 size = width, height = 460, 680
@@ -84,6 +92,7 @@ mywall = wall()
 mybullet = bullet()
 wallWhile = 0
 boolBulletFly = False
+bulleyStayFlag = True
 
 isRunning = True
 while isRunning:
@@ -94,6 +103,7 @@ while isRunning:
         if keyPressed[pygame.K_w]: 
             mybullet.startBullet(mylancher.x,mylancher.y)
             boolBulletFly = True
+            bulleyStayFlag = True
         if keyPressed[pygame.K_a]: mylancher.move('A')
         if keyPressed[pygame.K_d]: mylancher.move('D')
   screen.blit(backgroundPic,(0,0))
@@ -107,11 +117,18 @@ while isRunning:
   for i in range(20,441,20): pygame.draw.line(screen,(112,128,144),[i,0],[i,680],1) # Draw xy lines
   for i in range(20,681,20): pygame.draw.line(screen,(112,128,144),[0,i],[460,i],1)
 
+ 
   mylancher.draw()  # Draw lancher without xy lines
-
-  if  mybullet.bullety >0 and boolBulletFly == True: 
+  if  mybullet.bullety >0 and bulleyStayFlag == True and boolBulletFly == True: 
       mybullet.bulletFlyDraw()
-  if  mybullet.bullety <= 0:    boolBulletFly == False
+      if mywall.addPiece(mybullet.bulletx,mybullet.bullety) ==  False: 
+          bulleyStayFlag = False
+          print("False now !", bulleyStayFlag)
+  if  mybullet.bullety <= 0 or bulleyStayFlag == False:    
+      boolBulletFly == False
+
+
+
   
 
 
