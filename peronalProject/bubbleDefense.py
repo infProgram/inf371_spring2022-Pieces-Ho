@@ -56,39 +56,35 @@ class wall():
 
     def draw(self):     # 23 grids each line, and 34 lines, 34-2 = 32
         for i in range(len(self.posx)):      
-            # print("Line: ",i, end="  ")
-            # print("in: ",self.posx[i])
             for j in self.posx[i]:
                 self.walls = pygame.draw.rect(screen,self.wallColour,[j,i*20,20,20],0)
-        if len(self.posx) >=  32:
-            print("Game over!")
-            sys.exit()
+        if len(self.posx) >=  33:
+            return True
+        else: return False
         
     def move(self):
         self.posx.insert(0,random.sample(range(0,460,20),random.randint(12, 15)))
 
     def clearline(self):
-        for i in range(0,len(self.posx)):      
-            if len(self.posx[i]) == 23:
+        i = 0
+        while(i < len(self.posx)):
+            if len(self.posx[i]) >= 23:
                 del self.posx[i]
+                i = i-1
+            i = i+1
 
     def addPiece(self,x,y):
-        print("x: ",x, ",y: ",y)
         for i in range(len(self.posx)):      
             for j in self.posx[i]:
                 if x == j  and y == i*20 : 
-                    print("----insert= line: ",i+1, ",y: ",x)
-                    
-                    if i+1 < len(self.posx):
-                        self.posx[i+1].append(x)
-                    else: 
-                        self.posx.insert(i+1,[x])
+                    if i+1 < len(self.posx):   self.posx[i+1].append(x)
+                    else:  self.posx.insert(i+1,[x])
                     return False
-
         return True
 
 
 size = width, height = 460, 680
+fallTime = 200
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Bubble Defense') #  主窗口标题（Title）
 backgroundPic = pygame.image.load("bgPic.png")
@@ -98,6 +94,9 @@ mybullet = bullet()
 wallWhile = 0
 boolBulletFly = False
 bulleyStayFlag = True
+font = pygame.font.SysFont('Lucida Grande', 75)
+text = font.render('Game Over!', True, (0, 0, 0))
+
 
 isRunning = True
 while isRunning:
@@ -113,11 +112,11 @@ while isRunning:
         if keyPressed[pygame.K_d]: mylancher.move('D')
   screen.blit(backgroundPic,(0,0))
 
-  if wallWhile == 200:  # wall move speed in smaller while
+  if wallWhile == fallTime and boolOver == False:  # wall move speed in smaller while
       mywall.move()
       wallWhile = 0
   wallWhile = wallWhile+1
-  mywall.draw() # Draw wall with xy lines
+  boolOver = mywall.draw() # Draw wall with xy lines
 
   for i in range(20,441,20): pygame.draw.line(screen,(112,128,144),[i,0],[i,680],1) # Draw xy lines
   for i in range(20,681,20): pygame.draw.line(screen,(112,128,144),[0,i],[460,i],1)
@@ -131,10 +130,9 @@ while isRunning:
   if  mybullet.bullety <= 0 or bulleyStayFlag == False:    
       boolBulletFly == False
 
-
-
-  
-
+  if boolOver:
+      screen.blit(text, (90, 220))
+      time.sleep(1)
 
   time.sleep(0.001)
   pygame.display.flip()  # 刷新整个界面显示
