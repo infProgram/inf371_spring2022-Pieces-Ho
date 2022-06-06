@@ -57,6 +57,8 @@ class wall():
 
     def draw(self):     # 23 grids each line, and 34 lines, 34-2 = 32
         for i in range(len(self.posx)):      
+            print("Line: ",i)
+            print("in: ",self.posx[i])
             for j in self.posx[i]:
                 self.walls = pygame.draw.rect(screen,self.wallColour,[j,i*20,20,20],0)
         if len(self.posx) >=  32:
@@ -73,14 +75,16 @@ class wall():
 
     def addPiece(self,x,y):
         print("x: ",x, ",y: ",y)
-        boolFly = True
         for i in range(len(self.posx)):      
             for j in self.posx[i]:
                 if x == j  and y == i*20 : 
-                    boolFly = False
+                    print("----insert= line: ",i+1, ",y: ",x)
+                    # self.posx.insert(i+1,x)
+                    self.posx[i+1].append(x)
                     
-                
-        return boolFly
+                    return False
+
+        return True
 
 
 size = width, height = 460, 680
@@ -108,7 +112,7 @@ while isRunning:
         if keyPressed[pygame.K_d]: mylancher.move('D')
   screen.blit(backgroundPic,(0,0))
 
-  if wallWhile == 50:  # wall move speed in smaller while
+  if wallWhile == 70:  # wall move speed in smaller while
       mywall.move()
       wallWhile = 0
   wallWhile = wallWhile+1
@@ -117,13 +121,12 @@ while isRunning:
   for i in range(20,441,20): pygame.draw.line(screen,(112,128,144),[i,0],[i,680],1) # Draw xy lines
   for i in range(20,681,20): pygame.draw.line(screen,(112,128,144),[0,i],[460,i],1)
 
- 
+  mywall.clearline()
   mylancher.draw()  # Draw lancher without xy lines
   if  mybullet.bullety >0 and bulleyStayFlag == True and boolBulletFly == True: 
       mybullet.bulletFlyDraw()
       if mywall.addPiece(mybullet.bulletx,mybullet.bullety) ==  False: 
           bulleyStayFlag = False
-          print("False now !", bulleyStayFlag)
   if  mybullet.bullety <= 0 or bulleyStayFlag == False:    
       boolBulletFly == False
 
@@ -132,5 +135,5 @@ while isRunning:
   
 
 
-  time.sleep(0.05)
+  time.sleep(0.01)
   pygame.display.flip()  # 刷新整个界面显示
