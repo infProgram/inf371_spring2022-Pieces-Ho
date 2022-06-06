@@ -45,7 +45,6 @@ class bullet():   # bullet class
 
     def bulletFlyDraw(self):
         self.bullety = self.bullety - self.bulletSpeed
-        print("x: ",self.bulletx, ",y: ",self.bullety)
         self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.bulletx,self.bullety,20,20],0)
         self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
         
@@ -79,9 +78,11 @@ class wall():
             for j in self.posx[i]:
                 if x == j  and y == i*20 : 
                     print("----insert= line: ",i+1, ",y: ",x)
-                    # self.posx.insert(i+1,x)
-                    self.posx[i+1].append(x)
                     
+                    if i+1 < len(self.posx):
+                        self.posx[i+1].append(x)
+                    else: 
+                        self.posx.insert(i+1,[x])
                     return False
 
         return True
@@ -112,7 +113,7 @@ while isRunning:
         if keyPressed[pygame.K_d]: mylancher.move('D')
   screen.blit(backgroundPic,(0,0))
 
-  if wallWhile == 70:  # wall move speed in smaller while
+  if wallWhile == 200:  # wall move speed in smaller while
       mywall.move()
       wallWhile = 0
   wallWhile = wallWhile+1
@@ -135,5 +136,5 @@ while isRunning:
   
 
 
-  time.sleep(0.01)
+  time.sleep(0.001)
   pygame.display.flip()  # 刷新整个界面显示
