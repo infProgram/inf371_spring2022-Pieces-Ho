@@ -1,69 +1,64 @@
-from re import T
+# from re import T
 import sys, pygame, time, random
 pygame.init()
 
 class launcher():   # launcher class
-    def __init__(self) -> None:    
+    def __init__(self) -> None:     # set speed, inital xy, colour, frameColour and keypoints
         self.speed = 20
         self.x = 200
         self.y = 660
         self.tankColour = (154,205,50)
-        self.bulletSpeed = 10
-        self.bulletx = self.x+20
-        self.bullety = self.y-20
-        self.bulletColour = (238,201,0)
+        self.tankFrameColour = (46,139,87)
         self.points = [(self.x,self.y),(self.x+20,self.y),(self.x+20,self.y-20),(self.x+40,self.y-20),(self.x+40,self.y),(self.x+60,self.y),(self.x+60,self.y+20),(self.x,self.y+20)]
 
-    def draw(self):
+    def draw(self):     # draw the launcher
         self.tank = pygame.draw.polygon(screen, self.tankColour,self.points)
-        self.tankFrame = pygame.draw.polygon(screen, (46,139,87), self.points, width=2)
+        self.tankFrame = pygame.draw.polygon(screen, self.tankFrameColour, self.points, width=2)
 
-    def move(self,key):
+    def move(self,key):          # move the launcher
         if key == 'A': self.x = self.x - self.speed
         if key == 'D': self.x = self.x + self.speed
       
-        if self.x < -21 :  self.x = -20
+        if self.x < -21 :  self.x = -20     # make sure the tank will not out the window.
         if self.x > width-40: self.x = width-40
         self.points = [(self.x,self.y),(self.x+20,self.y),(self.x+20,self.y-20),(self.x+40,self.y-20),(self.x+40,self.y),(self.x+60,self.y),(self.x+60,self.y+20),(self.x,self.y+20)]
 
 
 class bullet():   # bullet class
-    def __init__(self) -> None:
+    def __init__(self) -> None:     # set speed, inital xy and colour
         self.bulletSpeed = 20
         self.bulletx = 0
         self.bullety = 0
         self.bulletColour = (238,201,0)
-        self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.bulletx,self.bullety,20,20],0)
-        self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
 
-    def startBullet(self,x,y):
+    def startBullet(self,x,y):     # when press 'W', draw the bullet from top of launcher
         print("press W! ")
         self.bulletx = x+20
         self.bullety = y-20
-        self.bullet = pygame.draw.rect(screen,self.bulletColour,[x+20,y-20,20,20],0)
+        self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.bulletx,self.bullety,20,20],0)
         self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
 
-    def bulletFlyDraw(self):
+    def bulletFlyDraw(self):    # after press 'W', bullet fly up
         self.bullety = self.bullety - self.bulletSpeed
         self.bullet = pygame.draw.rect(screen,self.bulletColour,[self.bulletx,self.bullety,20,20],0)
         self.bulletFrame = pygame.draw.rect(screen,(139,121,94),[self.bulletx,self.bullety,20,20],1)
         
 
-class wall():
-    def __init__(self) -> None:
+class wall():   # wall class
+    def __init__(self) -> None:     # set colour, and initial 5 lines wall by random(the wall store in 2D array).
         self.wallColour = (139,58,58)
-        self.posx = [random.sample(range(0,460,20),15),random.sample(range(0,460,20),random.randint(12, 15)),random.sample(range(0,460,20),13),random.sample(range(0,460,20),14),random.sample(range(0,460,20),15)]
+        self.posx = [random.sample(range(0,460,20),15),random.sample(range(0,460,20),16),random.sample(range(0,460,20),17),random.sample(range(0,460,20),18),random.sample(range(0,460,20),18)]
 
-    def draw(self):     # 23 grids each line, and 34 lines, 34-2 = 32
+    def draw(self):       # draw wall by 2D array, return gameover or not
         for i in range(len(self.posx)):      
             for j in self.posx[i]:
                 self.walls = pygame.draw.rect(screen,self.wallColour,[j,i*20,20,20],0)
-        if len(self.posx) >=  33:
+        if len(self.posx) >=  33:   # 23 grids each line, and 34 lines, 34-2 = 32
             return True
         else: return False
         
-    def move(self):
-        self.posx.insert(0,random.sample(range(0,460,20),random.randint(12, 15)))
+    def move(self):     # move down the wall, which is equivalent to adding row 0
+        self.posx.insert(0,random.sample(range(0,460,20),random.randint(15, 20)))
 
     def clearline(self):
         i = 0
@@ -83,18 +78,18 @@ class wall():
         return True
 
 
-size = width, height = 460, 680
-fallTime = 200
+size = width, height = 460, 680     # screen size, title, and back picture 
 screen = pygame.display.set_mode(size)
-pygame.display.set_caption('Bubble Defense') #  主窗口标题（Title）
+pygame.display.set_caption('Bubble Defense')
 backgroundPic = pygame.image.load("bgPic.png")
-mylancher = launcher()
+fallTime = 450  # time of the wall fall down, it smaller, game harder.
+mylancher = launcher()  # 3 instance of class
 mywall = wall()
 mybullet = bullet()
-wallWhile = 0
-boolBulletFly = False
-bulleyStayFlag = True
-font = pygame.font.SysFont('Lucida Grande', 75)
+wallWhile = 0   # time of wall fall start from 0
+boolBulletFly = False   # bool make bullet fly or not
+bulleyStayFlag = True   # bool make bullet stay or not
+font = pygame.font.SysFont('Lucida Grande', 75)     # the text size, style of GameOver
 text = font.render('Game Over!', True, (0, 0, 0))
 
 
