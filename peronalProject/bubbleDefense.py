@@ -1,4 +1,3 @@
-# from re import T
 import sys, pygame, time, random
 pygame.init()
 
@@ -53,14 +52,14 @@ class wall():   # wall class
         for i in range(len(self.posx)):      
             for j in self.posx[i]:
                 self.walls = pygame.draw.rect(screen,self.wallColour,[j,i*20,20,20],0)
-        if len(self.posx) >=  33:   # 23 grids each line, and 34 lines, 34-2 = 32
+        if len(self.posx) >=  33:   # check gameover, there are 23 grids each line, and 34 lines, 34-2+1 = 33
             return True
         else: return False
         
     def move(self):     # move down the wall, which is equivalent to adding row 0
         self.posx.insert(0,random.sample(range(0,460,20),random.randint(15, 20)))
 
-    def clearline(self):
+    def clearline(self):    # when a line is full, clear it.
         i = 0
         while(i < len(self.posx)):
             if len(self.posx[i]) >= 23:
@@ -68,7 +67,7 @@ class wall():   # wall class
                 i = i-1
             i = i+1
 
-    def addPiece(self,x,y):
+    def addPiece(self,x,y):     # when bullet arrive, it becomes a new pieces of wall
         for i in range(len(self.posx)):      
             for j in self.posx[i]:
                 if x == j  and y == i*20 : 
@@ -82,7 +81,7 @@ size = width, height = 460, 680     # screen size, title, and back picture
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption('Bubble Defense')
 backgroundPic = pygame.image.load("bgPic.png")
-fallTime = 450  # time of the wall fall down, it smaller, game harder.
+fallTime = 550  # time of the wall fall down, it smaller, game harder.
 mylancher = launcher()  # 3 instance of class
 mywall = wall()
 mybullet = bullet()
@@ -92,12 +91,15 @@ bulleyStayFlag = True   # bool make bullet stay or not
 font = pygame.font.SysFont('Lucida Grande', 75)     # the text size, style of GameOver
 text = font.render('Game Over!', True, (0, 0, 0))
 
+pressA = False
+pressD = False
 
 isRunning = True
 while isRunning:
   for event in pygame.event.get():
     if (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE) or event.type == pygame.QUIT: sys.exit()
-    if event.type == pygame.KEYDOWN: 
+    
+    if event.type == pygame.KEYDOWN:    # control with 'W', 'A', 'D' in game 
         keyPressed =  pygame.key.get_pressed()
         if keyPressed[pygame.K_w]: 
             mybullet.startBullet(mylancher.x,mylancher.y)
@@ -105,6 +107,56 @@ while isRunning:
             bulleyStayFlag = True
         if keyPressed[pygame.K_a]: mylancher.move('A')
         if keyPressed[pygame.K_d]: mylancher.move('D')
+ 
+        # # pygame.key.set_repeat(0,1)
+        # pygame.key.set_repeat(pygame.KEYDOWN)
+        # keyRepeat = pygame.key.get_pressed()
+        # if keyRepeat[pygame.K_a]: mylancher.move('A')
+        # if keyRepeat[pygame.K_a]:  mylancher.move('D')
+
+    # pygame.key.set_repeat(0,1)
+    pygame.key.set_repeat(pygame.KEYDOWN)
+    keyRepeat = pygame.key.get_pressed()
+    if keyRepeat[pygame.K_a]: mylancher.move('A')
+    if keyRepeat[pygame.K_a]:  mylancher.move('D')
+
+
+#     if event.type == pygame.KEYDOWN:    # control with 'W', 'A', 'D' in game 
+#         keyPressed =  pygame.key.get_pressed()
+#         if keyPressed[pygame.K_w] : 
+#             mybullet.startBullet(mylancher.x,mylancher.y)
+#             boolBulletFly = True
+#             bulleyStayFlag = True
+
+#         if keyPressed[pygame.K_a] and pressA == False: 
+#             pressA = True
+#             print("PPpress A! ")
+#         if keyPressed[pygame.K_d] and pressD == False: 
+#             pressD = True
+#             print("PPpress D! ")
+#     elif event.type == pygame.KEYUP:
+#         if event.key == pygame.K_a : pressA = False
+#         if event.key == pygame.K_d : pressD = False
+#         print(" in False")
+#     # print("when in it boolA: ", pressA, " boolD: ", pressD)
+#   if pressA == True:    
+#         mylancher.move('A')
+#         print("move A")
+#         time.sleep(0.03)
+#   if pressD == True:    
+#         mylancher.move('D')
+#         time.sleep(0.03)
+
+
+    # if event.type == pygame.KEYDOWN:    # control with 'W', 'A', 'D' in game 
+    #     keyPressed =  pygame.key.get_pressed()
+    #     if keyPressed[pygame.K_w]: 
+    #         mybullet.startBullet(mylancher.x,mylancher.y)
+    #         boolBulletFly = True
+    #         bulleyStayFlag = True
+    #     if keyPressed[pygame.K_a]: mylancher.move('A')
+    #     if keyPressed[pygame.K_d]: mylancher.move('D')
+
   screen.blit(backgroundPic,(0,0))
 
   if wallWhile == fallTime and boolOver == False:  # wall move speed in smaller while
@@ -116,16 +168,17 @@ while isRunning:
   for i in range(20,441,20): pygame.draw.line(screen,(112,128,144),[i,0],[i,680],1) # Draw xy lines
   for i in range(20,681,20): pygame.draw.line(screen,(112,128,144),[0,i],[460,i],1)
 
-  mywall.clearline()
+  mywall.clearline()    # check whether the line is full
   mylancher.draw()  # Draw lancher without xy lines
-  if  mybullet.bullety >0 and bulleyStayFlag == True and boolBulletFly == True: 
+
+  if  mybullet.bullety >0 and bulleyStayFlag == True and boolBulletFly == True:     # after press 'W', bullet fly
       mybullet.bulletFlyDraw()
       if mywall.addPiece(mybullet.bulletx,mybullet.bullety) ==  False: 
           bulleyStayFlag = False
   if  mybullet.bullety <= 0 or bulleyStayFlag == False:    
       boolBulletFly == False
 
-  if boolOver:
+  if boolOver:  # Print Game over
       screen.blit(text, (90, 220))
       time.sleep(1)
 
