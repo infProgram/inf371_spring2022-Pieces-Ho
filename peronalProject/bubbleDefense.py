@@ -99,28 +99,6 @@ while isRunning:
   for event in pygame.event.get():
     if (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE) or event.type == pygame.QUIT: sys.exit()
     
-    if event.type == pygame.KEYDOWN:    # control with 'W', 'A', 'D' in game 
-        keyPressed =  pygame.key.get_pressed()
-        if keyPressed[pygame.K_w]: 
-            mybullet.startBullet(mylancher.x,mylancher.y)
-            boolBulletFly = True
-            bulleyStayFlag = True
-        if keyPressed[pygame.K_a]: mylancher.move('A')
-        if keyPressed[pygame.K_d]: mylancher.move('D')
- 
-        # # pygame.key.set_repeat(0,1)
-        # pygame.key.set_repeat(pygame.KEYDOWN)
-        # keyRepeat = pygame.key.get_pressed()
-        # if keyRepeat[pygame.K_a]: mylancher.move('A')
-        # if keyRepeat[pygame.K_a]:  mylancher.move('D')
-
-    # pygame.key.set_repeat(0,1)
-    pygame.key.set_repeat(pygame.KEYDOWN)
-    keyRepeat = pygame.key.get_pressed()
-    if keyRepeat[pygame.K_a]: mylancher.move('A')
-    if keyRepeat[pygame.K_a]:  mylancher.move('D')
-
-
 #     if event.type == pygame.KEYDOWN:    # control with 'W', 'A', 'D' in game 
 #         keyPressed =  pygame.key.get_pressed()
 #         if keyPressed[pygame.K_w] : 
@@ -138,7 +116,7 @@ while isRunning:
 #         if event.key == pygame.K_a : pressA = False
 #         if event.key == pygame.K_d : pressD = False
 #         print(" in False")
-#     # print("when in it boolA: ", pressA, " boolD: ", pressD)
+    
 #   if pressA == True:    
 #         mylancher.move('A')
 #         print("move A")
@@ -147,6 +125,29 @@ while isRunning:
 #         mylancher.move('D')
 #         time.sleep(0.03)
 
+
+    if event.type == pygame.KEYDOWN:    # control with 'W', 'A', 'D' in game 
+        keyPressed =  pygame.key.get_pressed()
+        if keyPressed[pygame.K_w]: 
+            mybullet.startBullet(mylancher.x,mylancher.y)
+            boolBulletFly = True
+            bulleyStayFlag = True
+        if keyPressed[pygame.K_a]: 
+            pygame.key.set_repeat(100,15)
+            mylancher.move('A')
+        if keyPressed[pygame.K_d]: 
+            pygame.key.set_repeat(100,15)
+            mylancher.move('D')
+ 
+        # pygame.key.set_repeat(pygame.KEYDOWN)
+        # keyRepeat = pygame.key.get_pressed()
+        # if keyRepeat[pygame.K_a]: mylancher.move('A')
+        # if keyRepeat[pygame.K_a]:  mylancher.move('D')
+
+    # pygame.key.set_repeat(pygame.KEYDOWN)
+    # keyRepeat = pygame.key.get_pressed()
+    # if keyRepeat[pygame.K_a]: mylancher.move('A')
+    # if keyRepeat[pygame.K_a]:  mylancher.move('D')
 
     # if event.type == pygame.KEYDOWN:    # control with 'W', 'A', 'D' in game 
     #     keyPressed =  pygame.key.get_pressed()
